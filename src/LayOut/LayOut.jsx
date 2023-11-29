@@ -29,9 +29,7 @@ const LayOut = () => {
         <main>
           <LeftBar />
           <div className="container">
-            <Home />
-            <Profile />
-            <ChatBox />
+            <Outlet />
           </div>
           <RightBar />
         </main>
@@ -70,19 +68,20 @@ const LayOut = () => {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
-      {/* <BrowserRouter>
+      {/* <RouterProvider router={router} /> */}
+      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<Feed />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/profile/id" element={<Profile />} />
-            <Route path="/chatbox" element={<ChatBox />} />
+            <Route path="/" element={<Feed />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile/id" element={<Profile />} />
+              <Route path="/chatbox" element={<ChatBox />} />
+            </Route>
           </Route>
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 };
