@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { setUser, setToken } from "../../Features/auth/authenticationSlice";
-import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");

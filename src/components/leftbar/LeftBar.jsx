@@ -11,6 +11,8 @@ import videos from "../../assets/icon/6.png";
 import message from "../../assets/icon/7.png";
 
 const LeftBar = () => {
+  const user = JSON.parse(localStorage.getItem("facebook-user"));
+
   return (
     <div className="leftBar">
       <div className="left-container">
@@ -18,7 +20,7 @@ const LeftBar = () => {
           <Link to={"/profile/id"}>
             <div className="user">
               <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
-              <h4>Beg Joker</h4>
+              <h4>{user.name}</h4>
             </div>
           </Link>
           <Link to={"/"}>

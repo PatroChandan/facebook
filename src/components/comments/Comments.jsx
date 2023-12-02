@@ -1,30 +1,143 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./comment.css";
-import CommentData from "../../FackApis/CommentData";
 import CurrentUser from "../../FackApis/CurrentUserData";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Comments = () => {
+const Comments = ({ postId }) => {
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState();
+
+  var key = "content";
+
+  var obj = {};
+
+  obj[key] = commentText;
+
+  useEffect(() => {
+    const token = localStorage.getItem("facebook-token");
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(
+          `https://academics.newtonschool.co/api/v1/facebook/post/${postId}/comments`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              projectID: "f104bi07c490",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const res = await response.json();
+        if (res.status === "success") {
+          setComments(res.data);
+        }
+      } catch (error) {
+        console.error("Error :", error);
+      }
+    };
+    fetchComments();
+  }, [postId, comments]);
+
+  // console.log("comment", commentText);
+  // const commentSend = async () => {
+  //   const token = localStorage.getItem("facebook-token");
+
+  //   try {
+  //     const commented = await fetch(
+  //       `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+  //       {
+  //         method: "POST",
+
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           projectID: "f104bi07c490",
+  //         },
+  //         body: JSON.stringify({
+  //           content: commentText,
+  //         }),
+  //       }
+  //     );
+
+  //     const res = await commented.json();
+
+  //     if (res.status === "success") {
+  //       toast.success(res.message, {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //     } else {
+  //       toast.error(res.message, {
+  //         position: toast.POSITION.TOP_CENTER,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     // console.error("Error while liking:", error);
+  //     toast.error("An error occurred while processing your request.", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //   }
+  // };
+
+  const commentSend = () => {
+    const token = localStorage.getItem("facebook-token");
+    var myHeaders = new Headers();
+    myHeaders.append("projectID", "f104bi07c490");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var raw = JSON.stringify({
+      content: commentText,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <div className="comments">
       <div className="writebox">
         <form action="#">
           <div className="user">
             <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
-            <input type="text" placeholder="Write a comment" />
-            <button type="submit" className="btn btn-primary">
+            <input
+              type="text"
+              placeholder="Write a comment"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                commentSend();
+              }}
+            >
               Send
             </button>
           </div>
         </form>
       </div>
-      {CommentData.map((comment) => (
+      {comments.map((comment) => (
         <Link to={"/profile/id"}>
           <div className="user" key={comment.id}>
             <img src={comment.commentProfile} alt="" />
             <div>
               <h5>{comment.name}</h5>
-              <p>{comment.CommeText}</p>
+              <p>{comment.content}</p>
             </div>
             <small>1h</small>
           </div>

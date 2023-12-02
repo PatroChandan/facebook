@@ -26,8 +26,8 @@ const ChatBox = () => {
             <button type="submit" className="btn btn-primary">
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </button>
-            <label className="btn btn-primary" htmlFor="CFile">
-              <input type="file" id="FileAlt" />
+            <label className="btn btn-primary" htmlFor="file">
+              <input type="file" id="file" />
               <FontAwesomeIcon icon={faFileAlt} />
             </label>
           </form>

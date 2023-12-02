@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeed, faLink, faMessage } from "@fortawesome/free-solid-svg-icons";
 
 const UserProfile = () => {
+  const user = JSON.parse(localStorage.getItem("facebook-user"));
   return (
     <div className="userProfile">
       <div className="cover-photos">
@@ -14,8 +15,8 @@ const UserProfile = () => {
       <div className="profile-info">
         <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
         <div className="user-name">
-          <h3>{CurrentUser.map((user) => user.name)}</h3>
-          <h5>{CurrentUser.map((user) => user.username)}</h5>
+          <h3>{user.name}</h3>
+          <h5>{user.email}</h5>
         </div>
         <div className="profile-button">
           <Link to={"/chatbox/id"}>
