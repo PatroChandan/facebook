@@ -24,7 +24,6 @@ const AddPost = () => {
     setImageURL(URL.createObjectURL(file));
     setImage(file);
   };
-  console.log("path", image);
   const addPost = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("facebook-token");
@@ -33,7 +32,7 @@ const AddPost = () => {
     myHeaders.append("Authorization", "Bearer " + token);
 
     var formdata = new FormData();
-    formdata.append("title", "time");
+    formdata.append("title", "title");
     formdata.append("content", textValue);
     formdata.append("images", image);
 
@@ -48,6 +47,18 @@ const AddPost = () => {
       requestOptions
     )
       .then((response) => {
+        if (response.ok) {
+          setTextValue("");
+          setImage(null);
+          setImageURL(null);
+          toast.success(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
         return response;
       })
       .then((result) => {

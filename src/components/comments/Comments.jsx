@@ -40,45 +40,6 @@ const Comments = ({ postId }) => {
     fetchComments();
   }, [postId, comments]);
 
-  // console.log("comment", commentText);
-  // const commentSend = async () => {
-  //   const token = localStorage.getItem("facebook-token");
-
-  //   try {
-  //     const commented = await fetch(
-  //       `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
-  //       {
-  //         method: "POST",
-
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           projectID: "f104bi07c490",
-  //         },
-  //         body: JSON.stringify({
-  //           content: commentText,
-  //         }),
-  //       }
-  //     );
-
-  //     const res = await commented.json();
-
-  //     if (res.status === "success") {
-  //       toast.success(res.message, {
-  //         position: toast.POSITION.TOP_CENTER,
-  //       });
-  //     } else {
-  //       toast.error(res.message, {
-  //         position: toast.POSITION.TOP_CENTER,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     // console.error("Error while liking:", error);
-  //     toast.error("An error occurred while processing your request.", {
-  //       position: toast.POSITION.TOP_CENTER,
-  //     });
-  //   }
-  // };
-
   const commentSend = () => {
     const token = localStorage.getItem("facebook-token");
     var myHeaders = new Headers();
@@ -101,7 +62,19 @@ const Comments = ({ postId }) => {
       `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
       requestOptions
     )
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.ok) {
+          setComments(...Comments, response.data);
+          toast.success(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        return response.text();
+      })
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
