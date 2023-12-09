@@ -55,7 +55,12 @@ const Nav = () => {
       <div className="nav-container">
         <div className="nav-left">
           <Link to={"/"}>
-            <h3 className="logo">facebook</h3>
+            {/* <h3 className="logo">facebook</h3> */}
+            <img
+              src="https://i.ibb.co/72dN4JJ/Facebook-icon-2019-1.png"
+              alt=""
+              style={{ width: "40px", height: "40px" }}
+            />
           </Link>
           <div className="Nav-Searchbar">
             <FontAwesomeIcon icon={faSearch} />
