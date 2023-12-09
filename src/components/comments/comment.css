@@ -20,3 +20,6 @@
   border-radius: 0.5rem;
   color: var(--color-text);
 }
+.user p {
+  padding-top: 14px;
+}

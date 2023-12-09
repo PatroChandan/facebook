@@ -10,7 +10,7 @@ const CommingSoon = () => {
         alignItems: "center",
       }}
     >
-      <img src={comingSoon} alt="" style={{ width: "200px" }} />
+      <img src={comingSoon} alt="" style={{ width: "400px" }} />
     </div>
   );
 };

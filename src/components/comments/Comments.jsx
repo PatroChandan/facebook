@@ -3,6 +3,7 @@ import "./comment.css";
 import CurrentUser from "../../FackApis/CurrentUserData";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import comentprofile from "../../assets/img/feed2.jpg";
 
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
@@ -31,7 +32,11 @@ const Comments = ({ postId }) => {
         );
         const res = await response.json();
         if (res.status === "success") {
-          setComments(res.data);
+          const commentsWithTime = res.data.map((comment) => ({
+            ...comment,
+            time: comment.createdAt,
+          }));
+          setComments(commentsWithTime);
         }
       } catch (error) {
         console.error("Error :", error);
@@ -107,12 +112,17 @@ const Comments = ({ postId }) => {
       {comments.map((comment) => (
         <Link to={"/profile/id"}>
           <div className="user" key={comment.id}>
-            <img src={comment.commentProfile} alt="" />
+            <img src={comentprofile} alt="" />
             <div>
               <h5>{comment.name}</h5>
               <p>{comment.content}</p>
             </div>
-            <small>1h</small>
+            <small style={{ fontSize: "12px" }}>
+              {new Date(comment.time).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+              })}
+            </small>
           </div>
         </Link>
       ))}

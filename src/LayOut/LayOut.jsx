@@ -39,35 +39,6 @@ const LayOut = () => {
     );
   };
 
-  // Router.....
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Feed />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/profile/:id",
-          element: <Profile />,
-        },
-        {
-          path: "/chatbox",
-          element: <ChatBox />,
-        },
-      ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/signup",
-      element: <Signup />,
-    },
-  ]);
   return (
     <>
       {/* <RouterProvider router={router} /> */}

@@ -11,7 +11,7 @@ const Feeds = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://academics.newtonschool.co/api/v1/facebook/post",
+          "https://academics.newtonschool.co/api/v1/facebook/post?limit=100",
           {
             headers: {
               projectID: "f104bi07c490",
