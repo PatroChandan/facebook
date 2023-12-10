@@ -13,24 +13,27 @@ const VisitProfile = () => {
   // const searchPost = useSelector((state) => state.search.searchPost.data.data);
 
   // console.log("state", location);
-  useEffect(async () => {
+  useEffect(() => {
     console.log("serch name", location.state?.author?.name);
-    try {
-      let response = await axios.get(
-        `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${location.state?.author?.name}"}`,
-        {
-          headers: {
-            projectID: "f104bi07c490",
-          },
-        }
-      );
+    const getResult = async () => {
+      try {
+        let response = await axios.get(
+          `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${location.state?.author?.name}"}`,
+          {
+            headers: {
+              projectID: "f104bi07c490",
+            },
+          }
+        );
 
-      setPosts(response.data.data);
-      console.log("post1", posts);
-      // dispatch(setSearchPost(response));
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+        setPosts(response.data.data);
+        console.log("post1", posts);
+        // dispatch(setSearchPost(response));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getResult();
   }, [location.state?.author?.name]);
   console.log("post2", posts);
   return (
@@ -81,9 +84,9 @@ const VisitProfile = () => {
           </div>
         </div>
       </div>
-      {/* {posts?.map((fed) => (
+      {posts?.map((fed) => (
         <Feed fed={fed} key={fed._id} />
-      ))} */}
+      ))}
     </>
   );
 };
