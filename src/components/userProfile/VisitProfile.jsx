@@ -7,12 +7,9 @@ import Feed from "../feeds/Feed";
 import axios from "axios";
 
 const VisitProfile = () => {
-  const [posts, setPosts] = useState({});
+  const [posts, setPosts] = useState([]);
   const location = useLocation();
-  // const dispatch = useDispatch();
-  // const searchPost = useSelector((state) => state.search.searchPost.data.data);
 
-  // console.log("state", location);
   useEffect(() => {
     console.log("serch name", location.state?.author?.name);
     const getResult = async () => {
@@ -27,15 +24,14 @@ const VisitProfile = () => {
         );
 
         setPosts(response.data.data);
-        console.log("post1", posts);
-        // dispatch(setSearchPost(response));
+        console.log("post1", response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     getResult();
-  }, [location.state?.author?.name]);
-  console.log("post2", posts);
+  }, []);
+  // console.log("post2", posts);
   return (
     <>
       <div className="userProfile">
@@ -84,9 +80,11 @@ const VisitProfile = () => {
           </div>
         </div>
       </div>
-      {posts?.map((fed) => (
-        <Feed fed={fed} key={fed._id} />
-      ))}
+      <div className="feeds">
+        {posts?.map((fed) => (
+          <Feed fed={fed} key={fed._id} />
+        ))}
+      </div>
     </>
   );
 };
