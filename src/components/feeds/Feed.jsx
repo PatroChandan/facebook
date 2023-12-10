@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./feeds.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment,
@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 const Feed = ({ fed }) => {
   const [openComment, setOpenComment] = useState(false);
+  const navigate = useNavigate();
 
   const commentHandler = () => {
     setOpenComment(!openComment);
@@ -53,18 +54,23 @@ const Feed = ({ fed }) => {
     }
   };
 
+  const handleNavigate = () => {
+    console.log("fed", fed);
+    navigate("/visitProfile", { state: fed });
+  };
+
   return (
     <div className="feed" key={fed?._id}>
       <div className="top-content">
-        <Link to={"/profile/id"}>
-          <div className="user">
-            <img src={fed?.author?.profileImage} alt="" />
-            <div>
-              <h5>{fed?.author?.name}</h5>
-              <small>1 Minute Ago</small>
-            </div>
+        {/* <Link to={"/profile/id"}> */}
+        <div className="user" onClick={handleNavigate}>
+          <img src={fed?.author?.profileImage} alt="" />
+          <div>
+            <h5>{fed?.author?.name}</h5>
+            <small>1 Minute Ago</small>
           </div>
-        </Link>
+        </div>
+        {/* </Link> */}
         <span>
           <FontAwesomeIcon icon={faListDots} />
         </span>

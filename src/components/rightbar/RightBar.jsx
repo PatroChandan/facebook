@@ -8,7 +8,7 @@ const RightBar = () => {
     <div className="rightBar">
       <div className="rightbar-container">
         <Message />
-        <FriendReqe />
+        {/* <FriendReqe /> */}
       </div>
     </div>
   );

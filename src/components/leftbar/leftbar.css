@@ -35,7 +35,15 @@ hr {
   color: var(--color-soft);
   font-size: 0.9rem;
 }
-
+/* .item,
+.user {
+  padding: 10px;
+  border-radius: 5px;
+}
+.user:hover,
+.item:hover {
+  background: var(--color-bg);
+} */
 @media (max-width: 1024px) {
   .left-container {
     width: fit-content;

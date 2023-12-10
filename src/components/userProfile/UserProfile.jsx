@@ -18,7 +18,6 @@ const UserProfile = () => {
   const [isEditingBio, setIsEditingBio] = useState(false);
 
   const handleBioChange = (e) => {
-    // e.preventDefault();
     setBio(e.target.value);
     const updateBio = { ...user };
     updateBio.bio = bio;
@@ -29,9 +28,30 @@ const UserProfile = () => {
   const handleImageChange = (e) => {
     const updatedUser = { ...user };
     if (e.target.name === "profile") {
-      updatedUser.ProfileImage = URL.createObjectURL(e.target.files[0]);
+      // const URL.createObjectURL
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const profileImage = e.target.result;
+          localStorage.setItem("profileImage", profileImage);
+        };
+
+        reader.readAsDataURL(file);
+      }
     } else {
-      updatedUser.CoverPhoto = URL.createObjectURL(e.target.files[0]);
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const coverPhoto = e.target.result;
+          localStorage.setItem("coverPhoto", coverPhoto);
+        };
+
+        reader.readAsDataURL(file);
+      }
     }
     setUser(updatedUser);
     localStorage.setItem("facebook-user", JSON.stringify(updatedUser));
@@ -45,7 +65,7 @@ const UserProfile = () => {
     <div className="userProfile">
       <div className="cover-photos">
         <label htmlFor="cover" className="cover-picture">
-          <img src={user.CoverPhoto} alt="" />
+          <img src={localStorage.getItem("coverPhoto")} alt="" />
         </label>
         <input
           type="file"
@@ -57,7 +77,11 @@ const UserProfile = () => {
       </div>
       <div className="profile-info">
         <label htmlFor="profile" className="profile-picture">
-          <img src={user.ProfileImage} alt="" />
+          <img
+            src={localStorage.getItem("profileImage")}
+            alt=""
+            id="profileImg"
+          />
         </label>
         <input
           type="file"
