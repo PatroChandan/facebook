@@ -17,20 +17,20 @@ const Message = () => {
         <input type="search" placeholder="Search Message" />
       </div> */}
       <div className="border-div"></div>
+      {/* <Link to={"/chatbox/id"}> */}
       {MessageData.map((mess) => (
-        <Link to={"/chatbox/id"}>
-          <div className="message" key={mess.id}>
-            <div className="user">
-              <img src={mess.img} alt="" />
-              <div className="green-active"></div>
-            </div>
-            <div className="message-body">
-              <h5>{mess.name}</h5>
-              <p>{mess.mText}</p>
-            </div>
+        <div className="message" key={mess.id}>
+          <div className="user">
+            <img src={mess.img} alt="" />
+            <div className="green-active"></div>
           </div>
-        </Link>
+          <div className="message-body">
+            <h5>{mess.name}</h5>
+            <p>{mess.mText}</p>
+          </div>
+        </div>
       ))}
+      {/* </Link> */}
     </div>
   );
 };

@@ -99,13 +99,15 @@ const UserProfile = () => {
               <FontAwesomeIcon icon={faMessage} />
             </button>
           </Link>
-          <button className="btn btn-primary">
+          {/* <button className="btn btn-primary">
             <FontAwesomeIcon icon={faFeed} />
             Follow Me
-          </button>
-          <button className="btn btn-primary">
-            <FontAwesomeIcon icon={faLink} />
-          </button>
+          </button> */}
+          <Link to={"/comming"}>
+            <button className="btn btn-primary">
+              <FontAwesomeIcon icon={faLink} />
+            </button>
+          </Link>
         </div>
         <div className="bio">
           {isEditingBio ? (

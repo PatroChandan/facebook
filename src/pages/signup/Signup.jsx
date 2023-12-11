@@ -25,7 +25,7 @@ const Signup = () => {
           name: userName,
           email: email,
           password: password,
-          appType: "music",
+          appType: "facebook",
         }),
       }
     );

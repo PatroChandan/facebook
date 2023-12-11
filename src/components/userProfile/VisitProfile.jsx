@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeed, faLink, faMessage } from "@fortawesome/free-solid-svg-icons";
 import Feed from "../feeds/Feed";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const VisitProfile = () => {
   const [posts, setPosts] = useState([]);
@@ -31,9 +32,16 @@ const VisitProfile = () => {
     };
     getResult();
   }, []);
-  // console.log("post2", posts);
+
+  const handleFollow = () => {
+    toast.success("You Have Followed Successfully", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   return (
     <>
+      <ToastContainer />
       <div className="userProfile">
         <div className="cover-photos">
           <label htmlFor="cover" className="cover-picture">
@@ -65,18 +73,20 @@ const VisitProfile = () => {
             <h5>{}</h5>
           </div>
           <div className="profile-button">
-            <Link to={"/chatbox/id"}>
+            <Link to={"/chatbox"}>
               <button className="btn btn-primary">
                 <FontAwesomeIcon icon={faMessage} />
               </button>
             </Link>
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={handleFollow}>
               <FontAwesomeIcon icon={faFeed} />
               Follow Me
             </button>
-            <button className="btn btn-primary">
-              <FontAwesomeIcon icon={faLink} />
-            </button>
+            <Link to={"/comming"}>
+              <button className="btn btn-primary">
+                <FontAwesomeIcon icon={faLink} />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

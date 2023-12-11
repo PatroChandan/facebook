@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
@@ -102,12 +103,16 @@ const AddPost = () => {
             <FontAwesomeIcon icon={faVideo} /> Videos
           </span>
         </label>
-        <span>
-          <FontAwesomeIcon icon={faTags} /> Tag
-        </span>
-        <span>
-          <FontAwesomeIcon icon={faSmile} /> Feelings
-        </span>
+        <Link to={"/comming"}>
+          <span>
+            <FontAwesomeIcon icon={faTags} /> Tag
+          </span>
+        </Link>
+        <Link to={"/comming"}>
+          <span>
+            <FontAwesomeIcon icon={faSmile} /> Feelings
+          </span>
+        </Link>
       </div>
       {image && (
         <div>
