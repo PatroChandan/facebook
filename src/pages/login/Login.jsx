@@ -18,7 +18,7 @@ const Login = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          projectId: "f104bi07c490",
+          projectID: "f104bi07c490",
         },
         body: JSON.stringify({
           email: email,
@@ -28,18 +28,18 @@ const Login = () => {
       }
     );
 
-    response = await response.json();
-    console.log("status", response.token);
-    // projectID: "f104bi07c490",
-    if (response && response.token) {
-      toast.success(response.status, {
+    const res = await response.json();
+    // console.log("status", response.token);
+    // // projectID: "f104bi07c490",
+    if (res.status === "success" && res.token) {
+      dispatch(setUser(res.data));
+      dispatch(setToken(res.token));
+      toast.success(res.status, {
         position: toast.POSITION.TOP_CENTER,
       });
       navigate("/");
-      dispatch(setUser(response.data));
-      dispatch(setToken(response.token));
     } else {
-      toast.error(response.message, {
+      toast.error(res.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

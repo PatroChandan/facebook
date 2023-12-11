@@ -12,10 +12,10 @@ const Message = () => {
         <h4>Message</h4>
         <FontAwesomeIcon icon={faEdit} />
       </div>
-      <div className="message-search">
+      {/* <div className="message-search">
         <FontAwesomeIcon icon={faSearch} />
         <input type="search" placeholder="Search Message" />
-      </div>
+      </div> */}
       <div className="border-div"></div>
       {MessageData.map((mess) => (
         <Link to={"/chatbox/id"}>

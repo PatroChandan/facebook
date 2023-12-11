@@ -28,7 +28,6 @@ const UserProfile = () => {
   const handleImageChange = (e) => {
     const updatedUser = { ...user };
     if (e.target.name === "profile") {
-      // const URL.createObjectURL
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
@@ -91,8 +90,8 @@ const UserProfile = () => {
           style={{ display: "none" }}
         />
         <div className="user-name">
-          <h3>{user.name}</h3>
-          <h5>{user.email}</h5>
+          <h3>{user?.name}</h3>
+          <h5>{user?.email}</h5>
         </div>
         <div className="profile-button">
           <Link to={"/chatbox/id"}>

@@ -21,6 +21,7 @@ import { setSearchPost } from "../../Features/auth/searchSlice";
 const Nav = () => {
   const [searchText, setSearchText] = useState();
   const [posts, setPosts] = useState({});
+  const [openDropMenu, setOpenDropMenu] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,6 +48,10 @@ const Nav = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleDropMenu = () => {
+    setOpenDropMenu(!openDropMenu);
   };
 
   const user = JSON.parse(localStorage.getItem("facebook-user"));
@@ -87,19 +92,39 @@ const Nav = () => {
           <Link to={"/chatbox"}>
             <FontAwesomeIcon icon={faEnvelope} />
           </Link>
-          <Link to={"/"}>
+          <Link to={"/comming"}>
             <FontAwesomeIcon icon={faBell} />
           </Link>
-          <DarkMood />
+          {/* <DarkMood /> */}
           <Link to={"/"}>
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faBars} style={{ display: "none" }} />
           </Link>
-          <div className="logout" onClick={logOut}>
+          {/* <div className="logout" onClick={logOut}>
             <FontAwesomeIcon icon={faRightFromBracket} />
-          </div>
-          <div className="user">
-            <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
-            <h4>{user.name}</h4>
+          </div> */}
+          <div className="user" onClick={handleDropMenu}>
+            <img src={localStorage.getItem("profileImage")} alt="" />
+            {openDropMenu && (
+              <div className="drop-down">
+                <Link to={"/profile/id"}>
+                  <div className="user">
+                    <img src={localStorage.getItem("profileImage")} alt="" />
+                    <h4>{user.name}</h4>
+                  </div>
+                </Link>
+                <div className="hr"></div>
+                <div className="drop-list">
+                  <DarkMood />
+                </div>
+                <div className="hr"></div>
+                <div className="drop-list">
+                  <div className="logout" onClick={logOut}>
+                    <FontAwesomeIcon icon={faRightFromBracket} />
+                    <h4>Sign Out</h4>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

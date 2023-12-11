@@ -1,5 +1,11 @@
-.dark-mood-icon: {
+.dark-mood-icon {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   transition: 0.3s ease;
+}
+.dark-mood-icon h4 {
+  color: var(--color-soft);
 }
 .dark-mood-icon:hover {
   transform: scale(1.2);

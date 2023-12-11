@@ -19,7 +19,7 @@ const LeftBar = () => {
         <div className="menu">
           <Link to={"/profile/id"}>
             <div className="user">
-              <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
+              <img src={localStorage.getItem("profileImage")} alt="" />
               <h4>{user.name}</h4>
             </div>
           </Link>

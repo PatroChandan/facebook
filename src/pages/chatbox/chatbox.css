@@ -26,6 +26,11 @@
   margin-top: 0.5rem;
   border: 3px solid var(--color-primary);
 }
+.chat-box-top .user-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .chat-box-bottom {
   background: var(--color-bg);
   width: 80%;

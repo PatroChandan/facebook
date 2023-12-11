@@ -71,7 +71,7 @@ const AddPost = () => {
   return (
     <form className="postForm">
       <div className="user form-top">
-        <img src={CurrentUser.map((user) => user.ProfieImage)} alt="" />
+        <img src={localStorage.getItem("profileImage")} alt="" />
         <input
           type="text"
           placeholder="What's on your mind ?"
