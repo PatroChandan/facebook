@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./addPost.css";
-import CurrentUser from "../../FackApis/CurrentUserData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faImage,
@@ -9,7 +8,6 @@ import {
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const AddPost = () => {
@@ -47,23 +45,25 @@ const AddPost = () => {
       "https://academics.newtonschool.co/api/v1/facebook/post",
       requestOptions
     )
-      .then((response) => {
-        if (response.ok) {
+      .then(async (response) => {
+        const res = await response.json();
+        console.log("status", res);
+        if (res.status === "success") {
           setTextValue("");
           setImage(null);
           setImageURL(null);
-          toast.success(response.message, {
+          toast.success(res.message, {
             position: toast.POSITION.TOP_CENTER,
           });
         } else {
-          toast.error(response.message, {
+          toast.error(res.message, {
             position: toast.POSITION.TOP_CENTER,
           });
         }
         return response;
       })
       .then((result) => {
-        console.log(result);
+        console.log("result", result);
       })
       .catch((error) => {
         console.log("error", error);
