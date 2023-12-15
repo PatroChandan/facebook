@@ -94,7 +94,7 @@ const UserProfile = () => {
           <h5>{user?.email}</h5>
         </div>
         <div className="profile-button">
-          <Link to={"/chatbox/id"}>
+          <Link to={"/chatbox"}>
             <button className="btn btn-primary">
               <FontAwesomeIcon icon={faMessage} />
             </button>

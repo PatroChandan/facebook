@@ -7,11 +7,18 @@ import {
   faArrowAltCircleRight,
   faFileAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import comingSoon from "../../assets/comming_soon.png";
+import CommingSoon from "../commingSoon/CommingSoon";
 
 const ChatBox = () => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("facebook-user"))
   );
+  const [send, setSend] = useState(false);
+
+  const handleSend = () => {
+    setSend(!send);
+  };
   return (
     <>
       <Stories />
@@ -23,10 +30,16 @@ const ChatBox = () => {
             <h5>{user.email}</h5>
           </div>
         </div>
+        {send && <img src={comingSoon} alt="" style={{ width: "300px" }} />}
+
         <div className="chat-box-bottom">
           <form action="#">
             <input type="text" placeholder="Write Somthing" />
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSend}
+            >
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </button>
             <label className="btn btn-primary" htmlFor="file">

@@ -3,18 +3,16 @@ import "./comment.css";
 import CurrentUser from "../../FackApis/CurrentUserData";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import comentprofile from "../../assets/img/feed2.jpg";
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId, incrementCommentCount }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
-
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("facebook-user"))
+  );
   var key = "content";
-
   var obj = {};
-
   obj[key] = commentText;
-
   useEffect(() => {
     const token = localStorage.getItem("facebook-token");
     const fetchComments = async () => {
@@ -32,11 +30,7 @@ const Comments = ({ postId }) => {
         );
         const res = await response.json();
         if (res.status === "success") {
-          const commentsWithTime = res.data.map((comment) => ({
-            ...comment,
-            time: comment.createdAt,
-          }));
-          setComments(commentsWithTime);
+          setComments(res.data);
         }
       } catch (error) {
         console.error("Error :", error);
@@ -44,7 +38,6 @@ const Comments = ({ postId }) => {
     };
     fetchComments();
   }, [postId, comments]);
-
   const commentSend = () => {
     const token = localStorage.getItem("facebook-token");
     var myHeaders = new Headers();
@@ -64,26 +57,29 @@ const Comments = ({ postId }) => {
     };
 
     fetch(
-      `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+      ` https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
       requestOptions
     )
-      .then((response) => {
-        if (response.ok) {
-          setComments(...Comments, response.data);
-          toast.success(response.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        } else {
-          toast.error(response.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        if (result.status === "success") {
+          // Create a new comment object that matches the structure of your existing comments
+          const newComment = {
+            id: result.data._id,
+            commentProfile: localStorage.getItem("profileImage"), // or wherever you store the profile image
+            name: user.name, // or wherever you store the user's name
+            content: result.data.content,
+          };
+          // Add the new comment to the comments state
+          setComments([...comments, newComment]);
+          // Clear the comment text
+          setCommentText("");
+          incrementCommentCount();
         }
-        return response.text();
       })
-      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
-
   return (
     <div className="comments">
       <div className="writebox">
@@ -112,22 +108,16 @@ const Comments = ({ postId }) => {
       {comments.map((comment) => (
         <Link to={"/profile/id"}>
           <div className="user" key={comment.id}>
-            <img src={comentprofile} alt="" />
+            <img src={comment.commentProfile} alt="" />
             <div>
               <h5>{comment.name}</h5>
               <p>{comment.content}</p>
             </div>
-            <small style={{ fontSize: "12px" }}>
-              {new Date(comment.time).toLocaleTimeString([], {
-                hour: "numeric",
-                minute: "2-digit",
-              })}
-            </small>
+            <small>1h</small>
           </div>
         </Link>
       ))}
     </div>
   );
 };
-
 export default Comments;
