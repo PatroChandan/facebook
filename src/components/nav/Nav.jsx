@@ -17,6 +17,7 @@ import { logout } from "../../Features/auth/authenticationSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setSearchPost } from "../../Features/auth/searchSlice";
+import { Avatar } from "@mui/material";
 
 const Nav = () => {
   const [searchText, setSearchText] = useState();
@@ -35,7 +36,7 @@ const Nav = () => {
         `https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"${searchText}"}`,
         {
           headers: {
-            projectID: "f104bi07c490",
+            projectID: "f104bi07c410",
           },
         }
       );
@@ -104,6 +105,7 @@ const Nav = () => {
           </div> */}
           <div className="user" onClick={handleDropMenu}>
             <img src={localStorage.getItem("profileImage")} alt="" />
+            {/* <Avatar sx={{ width: "33px", height: "33px" }} /> */}
             {openDropMenu && (
               <div className="drop-down">
                 <Link to={"/profile/id"}>

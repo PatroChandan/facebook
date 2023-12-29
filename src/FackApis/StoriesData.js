@@ -51,7 +51,7 @@ const Stories = [
   },
   {
     id: 6,
-    name: "Puza Singh",
+    name: "Puja Singh",
     storyProfile: StoryProfile6,
     story: Story6,
   },

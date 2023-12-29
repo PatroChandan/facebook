@@ -19,7 +19,7 @@ const Signup = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          projectID: "f104bi07c490",
+          projectID: "f104bi07c410",
         },
         body: JSON.stringify({
           name: userName,
@@ -32,7 +32,6 @@ const Signup = () => {
     const res = await response.json();
     console.log("register", response);
     if (res.status === "success") {
-      // console.log("sign up data", response.data);
       dispatch(setUser(res.data));
       dispatch(setToken(res.token));
 

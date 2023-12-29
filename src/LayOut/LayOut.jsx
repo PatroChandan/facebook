@@ -2,15 +2,7 @@ import React from "react";
 //Pages....
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup";
-import {
-  BrowserRouter,
-  Outlet,
-  Route,
-  Router,
-  RouterProvider,
-  Routes,
-  createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Profile from "../pages/profile/Profile";
 import ChatBox from "../pages/chatbox/ChatBox";
@@ -42,7 +34,6 @@ const LayOut = () => {
 
   return (
     <>
-      {/* <RouterProvider router={router} /> */}
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

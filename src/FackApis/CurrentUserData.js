@@ -4,8 +4,8 @@ import CoverPhoto from "../assets/img/CoverPhotos.jpg";
 const CurrentUser = [
   {
     id: "me",
-    name: "Beg Joker",
-    username: "@thebegjoker",
+    name: "chand",
+    username: "@theCoder",
     ProfieImage: ProfieImage,
     CoverPhoto: CoverPhoto,
   },

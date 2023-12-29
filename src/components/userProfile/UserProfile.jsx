@@ -3,12 +3,7 @@ import "./useProfile.css";
 import CurrentUser from "../../FackApis/CurrentUserData";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFeed,
-  faLink,
-  faMessage,
-  faEdit,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLink, faMessage, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const UserProfile = () => {
   const [user, setUser] = useState(

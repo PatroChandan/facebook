@@ -29,8 +29,7 @@ const Feed = ({ fed }) => {
 
   const likeHandle = async (postId) => {
     const token = localStorage.getItem("facebook-token");
-    const id = postId;
-    console.log("id", id);
+
     try {
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/facebook/like/${postId}`,
@@ -38,12 +37,12 @@ const Feed = ({ fed }) => {
           method: liked ? "DELETE" : "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            projectID: "f104bi07c490",
+            projectID: "f104bi07c410",
           },
         }
       );
       const res = await response.json();
-      console.log("liked", res);
+
       if (res.status === "success") {
         toast.success(res.message, {
           position: toast.POSITION.TOP_CENTER,
@@ -63,7 +62,6 @@ const Feed = ({ fed }) => {
     }
   };
   const handleNavigate = () => {
-    console.log("fed", fed);
     navigate("/VisitProfile", { state: fed });
   };
   return (

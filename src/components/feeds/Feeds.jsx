@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./feeds.css";
 import Feed from "./Feed";
-import HomeFeedData from "../../FackApis/HomeFeedData";
 import axios from "axios";
 
 const Feeds = () => {
@@ -11,10 +10,10 @@ const Feeds = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://academics.newtonschool.co/api/v1/facebook/post?limit=100",
+          "https://academics.newtonschool.co/api/v1/facebook/post",
           {
             headers: {
-              projectID: "f104bi07c490",
+              projectID: "f104bi07c410",
             },
           }
         );
@@ -25,7 +24,8 @@ const Feeds = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [posts?.data]);
+
   return (
     <div className="feeds">
       {posts?.data?.map((fed) => (

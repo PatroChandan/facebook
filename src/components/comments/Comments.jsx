@@ -10,9 +10,7 @@ const Comments = ({ postId, incrementCommentCount }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("facebook-user"))
   );
-  var key = "content";
-  var obj = {};
-  obj[key] = commentText;
+
   useEffect(() => {
     const token = localStorage.getItem("facebook-token");
     const fetchComments = async () => {
@@ -38,10 +36,11 @@ const Comments = ({ postId, incrementCommentCount }) => {
     };
     fetchComments();
   }, [postId, comments]);
+
   const commentSend = () => {
     const token = localStorage.getItem("facebook-token");
     var myHeaders = new Headers();
-    myHeaders.append("projectID", "f104bi07c490");
+    myHeaders.append("projectID", "f104bi07c410");
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", "Bearer " + token);
 

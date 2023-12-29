@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const AddPost = () => {
-  const [title, setTitle] = useState("");
   const [textValue, setTextValue] = useState("");
   const [image, setImage] = useState();
   const [imageURL, setImageURL] = useState();
@@ -27,7 +26,7 @@ const AddPost = () => {
     e.preventDefault();
     const token = localStorage.getItem("facebook-token");
     var myHeaders = new Headers();
-    myHeaders.append("projectID", "f104bi07c490");
+    myHeaders.append("projectID", "f104bi07c410");
     myHeaders.append("Authorization", "Bearer " + token);
 
     var formdata = new FormData();

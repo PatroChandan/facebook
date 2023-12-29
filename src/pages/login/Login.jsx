@@ -18,7 +18,7 @@ const Login = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          projectID: "f104bi07c490",
+          projectID: "f104bi07c410",
         },
         body: JSON.stringify({
           email: email,
@@ -29,8 +29,7 @@ const Login = () => {
     );
 
     const res = await response.json();
-    // console.log("status", response.token);
-    // // projectID: "f104bi07c490",
+
     if (res.status === "success" && res.token) {
       dispatch(setUser(res.data));
       dispatch(setToken(res.token));
